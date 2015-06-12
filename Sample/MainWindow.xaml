@@ -18,7 +18,7 @@
             <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
         <Label>FontPicker</Label>
-        <ex:FontPicker Grid.Row="0" Grid.Column="2"></ex:FontPicker>
+        <ex:FontPicker Grid.Row="0" Grid.Column="2" Font="Segoe Script"/>
         <Label Grid.Row="2" Grid.Column="0">ColorPicker</Label>
         <ex:ColorPicker Grid.Row="2" Grid.Column="2" Color="#B012CA44"></ex:ColorPicker>
     </Grid>
