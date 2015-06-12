@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
 using System.Windows;
@@ -43,6 +44,7 @@ namespace Kfstorm.WpfExtensions
         /// <value>
         /// The picked color.
         /// </value>
+        [Category("Common")]
         public Color Color
 		{
 			get { return (Color)GetValue(ColorProperty); }
@@ -92,6 +94,7 @@ namespace Kfstorm.WpfExtensions
         /// <value>
         /// The alpha channel.
         /// </value>
+        [Category("Common")]
         public byte A
 		{
 			get { return (byte)GetValue(AProperty); }
@@ -132,6 +135,7 @@ namespace Kfstorm.WpfExtensions
         /// <value>
         /// The red channel.
         /// </value>
+        [Category("Common")]
         public byte R
 		{
 			get { return (byte)GetValue(RProperty); }
@@ -172,6 +176,7 @@ namespace Kfstorm.WpfExtensions
         /// <value>
         /// The green channel.
         /// </value>
+        [Category("Common")]
         public byte G
 		{
 			get { return (byte)GetValue(GProperty); }
@@ -212,6 +217,7 @@ namespace Kfstorm.WpfExtensions
         /// <value>
         /// The blue channel.
         /// </value>
+        [Category("Common")]
         public byte B
 		{
 			get { return (byte)GetValue(BProperty); }
@@ -252,6 +258,7 @@ namespace Kfstorm.WpfExtensions
         /// <value>
         /// The hexadecimal string representation of the color.
         /// </value>
+        [Category("Common")]
         public string HexString
 		{
 			get { return (string)GetValue(HexStringProperty); }
@@ -316,6 +323,7 @@ namespace Kfstorm.WpfExtensions
         /// <value>
         /// <c>true</c> if the alpha channel is enabled; otherwise, <c>false</c>.
         /// </value>
+        [Category("Common")]
         public bool IsAlphaEnabled
 		{
 			get { return (bool)GetValue(IsAlphaEnabledProperty); }

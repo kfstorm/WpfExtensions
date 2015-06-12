@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.ComponentModel;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
@@ -25,6 +26,7 @@ namespace Kfstorm.WpfExtensions
         /// <value>
         /// The selected color.
         /// </value>
+        [Category("Common")]
         public Color SelectedColor
 		{
 			get { return (Color)GetValue(SelectedColorProperty); }

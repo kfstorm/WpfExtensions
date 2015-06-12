@@ -18,6 +18,7 @@
             <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
         <Label>FontPicker</Label>
+        <!-- ReSharper disable once MarkupAttributeTypo -->
         <ex:FontPicker Grid.Row="0" Grid.Column="2" Font="Segoe Script"/>
         <Label Grid.Row="2" Grid.Column="0">ColorPicker</Label>
         <ex:ColorPicker Grid.Row="2" Grid.Column="2" Color="#B012CA44"></ex:ColorPicker>

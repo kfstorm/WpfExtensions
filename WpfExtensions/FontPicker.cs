@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
 using System.Windows;
@@ -55,6 +56,7 @@ namespace Kfstorm.WpfExtensions
         /// <summary>
         /// The picked font
         /// </summary>
+        [Category("Common")]
         public FontFamily Font
         {
             get { return (FontFamily)GetValue(FontProperty); }
