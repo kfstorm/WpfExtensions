@@ -107,7 +107,6 @@ namespace Kfstorm.WpfExtensions
         {
             base.OnApplyTemplate();
 
-            // ReSharper disable once PossibleNullReferenceException
             ItemsSource = SystemFonts;
             SelectionChanged += (o, e) =>
             {

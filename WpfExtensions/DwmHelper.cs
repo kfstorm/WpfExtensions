@@ -136,7 +136,7 @@ namespace Kfstorm.WpfExtensions
         private void AddWindowMessageHook()
         {
             var interopHelper = new WindowInteropHelper(Window);
-            HwndSource source = HwndSource.FromHwnd(interopHelper.EnsureHandle());
+            var source = HwndSource.FromHwnd(interopHelper.EnsureHandle());
             if (source != null) source.AddHook(WndProc);
         }
 
@@ -196,7 +196,7 @@ namespace Kfstorm.WpfExtensions
                 return false;
 
             // ReSharper disable once IdentifierTypo
-            IntPtr hwnd = new WindowInteropHelper(Window).EnsureHandle();
+            var hwnd = new WindowInteropHelper(Window).EnsureHandle();
 
             var bb = new DWM_BLURBEHIND
             {
