@@ -74,6 +74,7 @@
     <Compile Include="Interop\SWP.cs" />
     <Compile Include="Interop\WH.cs" />
     <Compile Include="Interop\WS.cs" />
+    <Compile Include="PopupableColorPicker.cs" />
     <Compile Include="ShadowWindow.Partial.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

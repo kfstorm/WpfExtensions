@@ -3,6 +3,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="clr-namespace:Kfstorm.WpfExtensions">
     <local:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+    <local:BooleanToVisibilityConverter x:Key="BooleanReverseToVisibilityConverter" Reverse="True"/>
     <DrawingBrush x:Key="TransparentBackgroundBrush" TileMode="Tile" ViewportUnits="Absolute" Viewport="0,0,16,16">
         <DrawingBrush.Drawing>
             <DrawingGroup>
@@ -150,6 +151,7 @@
     <Style TargetType="{x:Type local:ColorPicker}">
         <Setter Property="BorderBrush" Value="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}"/>
         <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
         <Setter Property="SnapsToDevicePixels" Value="True"></Setter>
         <Setter Property="Template">
             <Setter.Value>
@@ -164,13 +166,13 @@
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
                             <Border BorderBrush="{x:Null}" BorderThickness="0">
-                                <Canvas x:Name="PART_GradualCanvas" ClipToBounds="True">
-                                    <Rectangle Width="{Binding ActualWidth, ElementName=PART_GradualCanvas}" Height="{Binding ActualHeight, ElementName=PART_GradualCanvas}">
+                                <Canvas x:Name="PART_GradientCanvas" ClipToBounds="True">
+                                    <Rectangle Width="{Binding ActualWidth, ElementName=PART_GradientCanvas}" Height="{Binding ActualHeight, ElementName=PART_GradientCanvas}">
                                         <Rectangle.Fill>
                                             <SolidColorBrush Color="{Binding SelectedColor, ElementName=PART_ColorSpectrumSlider}"/>
                                         </Rectangle.Fill>
                                     </Rectangle>
-                                    <Rectangle Width="{Binding ActualWidth, ElementName=PART_GradualCanvas}" Height="{Binding ActualHeight, ElementName=PART_GradualCanvas}">
+                                    <Rectangle Width="{Binding ActualWidth, ElementName=PART_GradientCanvas}" Height="{Binding ActualHeight, ElementName=PART_GradientCanvas}">
                                         <Rectangle.Fill>
                                             <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
                                                 <GradientStop Offset="0" Color="White"/>
@@ -178,7 +180,7 @@
                                             </LinearGradientBrush>
                                         </Rectangle.Fill>
                                     </Rectangle>
-                                    <Rectangle Width="{Binding ActualWidth, ElementName=PART_GradualCanvas}" Height="{Binding ActualHeight, ElementName=PART_GradualCanvas}">
+                                    <Rectangle Width="{Binding ActualWidth, ElementName=PART_GradientCanvas}" Height="{Binding ActualHeight, ElementName=PART_GradientCanvas}">
                                         <Rectangle.Fill>
                                             <LinearGradientBrush StartPoint="0,1" EndPoint="0, 0">
                                                 <GradientStop Offset="0" Color="#FF000000"/>
@@ -186,7 +188,7 @@
                                             </LinearGradientBrush>
                                         </Rectangle.Fill>
                                     </Rectangle>
-                                    <Grid x:Name="PART_GradualSelector" Width="10" Height="10" IsHitTestVisible="False">
+                                    <Grid x:Name="PART_GradientSelector" Width="10" Height="10" IsHitTestVisible="False">
                                         <Ellipse StrokeThickness="3" Stroke="White"/>
                                         <Ellipse StrokeThickness="1" Stroke="Black" Margin="1" />
                                     </Grid>
@@ -203,9 +205,9 @@
                                         <RowDefinition/>
                                     </Grid.RowDefinitions>
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="16"/>
+                                        <ColumnDefinition Width="Auto" MinWidth="16"/>
                                         <ColumnDefinition/>
-                                        <ColumnDefinition Width="36"/>
+                                        <ColumnDefinition Width="Auto" MinWidth="36"/>
                                     </Grid.ColumnDefinitions>
                                     <TextBlock Grid.Row="0" VerticalAlignment="Center"><Run Text="R"/></TextBlock>
                                     <Slider Grid.Row="0" Grid.Column="1" Style="{StaticResource ArgbSliderStyle}" Value="{Binding R, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"/>
@@ -222,7 +224,7 @@
                                     <Grid Grid.Row="4" Grid.ColumnSpan="3" Grid.Column="0" Margin="0,2,0,0">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition/>
-                                            <ColumnDefinition Width="80"/>
+                                            <ColumnDefinition Width="Auto" MinWidth="80"/>
                                         </Grid.ColumnDefinitions>
                                         <Border Grid.Column="0" Background="{StaticResource TransparentBackgroundBrush}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1">
                                             <Border MinHeight="20">
@@ -240,6 +242,30 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-        <Setter Property="Foreground" Value="White"/>
+    </Style>
+    <Style TargetType="{x:Type local:PopupableColorPicker}">
+        <Setter Property="BorderBrush" Value="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}"/>
+        <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="SnapsToDevicePixels" Value="True"></Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:PopupableColorPicker}">
+                    <Grid>
+                        <Border x:Name="PART_Border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{StaticResource TransparentBackgroundBrush}">
+                            <Rectangle>
+                                <Rectangle.Fill>
+                                    <SolidColorBrush Color="{Binding Color, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}"/>
+                                </Rectangle.Fill>
+                            </Rectangle>
+                        </Border>
+                        <Rectangle Fill="#7F7F7F7F" Visibility="{TemplateBinding IsEnabled, Converter={StaticResource BooleanReverseToVisibilityConverter}}"/>
+                        <Popup x:Name="PART_Popup" StaysOpen="False">
+                            <local:ColorPicker Color="{Binding Color, RelativeSource={RelativeSource TemplatedParent}}" Background="{TemplateBinding Background}" IsAlphaEnabled="{TemplateBinding IsAlphaEnabled}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}"/>
+                        </Popup>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
 </ResourceDictionary>

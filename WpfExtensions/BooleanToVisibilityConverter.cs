@@ -10,6 +10,8 @@ namespace Kfstorm.WpfExtensions
     /// </summary>
     public class BooleanToVisibilityConverter : IValueConverter
     {
+        public bool Reverse { get; set; }
+
         /// <summary>
         /// Converts the <see cref="bool"/> value to the <see cref="Visibility"/> value.
         /// </summary>
@@ -20,7 +22,7 @@ namespace Kfstorm.WpfExtensions
         /// <returns>The <see cref="Visibility"/> value.</returns>
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if ((bool)value) return Visibility.Visible;
+            if ((bool)value ^ Reverse) return Visibility.Visible;
             return parameter ?? Visibility.Hidden;
         }
 
@@ -38,11 +40,11 @@ namespace Kfstorm.WpfExtensions
             {
                 case Visibility.Collapsed:
                 case Visibility.Hidden:
-                    return false;
+                    return Reverse;
                 case Visibility.Visible:
-                    return true;
+                    return !Reverse;
                 default:
-                    return true;
+                    return !Reverse;
             }
         }
     }

@@ -108,22 +108,7 @@ namespace Kfstorm.WpfExtensions
         {
             var picker = (ColorPicker)d;
             picker.UpdateColor(Color.FromArgb((byte)e.NewValue, picker.Color.R, picker.Color.G, picker.Color.B), null);
-            picker.RaiseEvent(new RoutedPropertyChangedEventArgs<byte>((byte)e.OldValue, (byte)e.NewValue, AChangedEvent));
         }
-
-        public event RoutedPropertyChangedEventHandler<byte> AChanged
-        {
-            add
-            {
-                AddHandler(AChangedEvent, value);
-            }
-            remove
-            {
-                RemoveHandler(AChangedEvent, value);
-            }
-        }
-
-        public static readonly RoutedEvent AChangedEvent = EventManager.RegisterRoutedEvent("AChanged", RoutingStrategy.Bubble, typeof(RoutedPropertyChangedEventHandler<byte>), typeof(ColorPicker));
 
         #endregion
 
@@ -149,22 +134,7 @@ namespace Kfstorm.WpfExtensions
         {
             var picker = (ColorPicker)d;
             picker.UpdateColor(Color.FromArgb(picker.Color.A, (byte)e.NewValue, picker.Color.G, picker.Color.B), null);
-            picker.RaiseEvent(new RoutedPropertyChangedEventArgs<byte>((byte)e.OldValue, (byte)e.NewValue, RChangedEvent));
         }
-
-        public event RoutedPropertyChangedEventHandler<byte> RChanged
-        {
-            add
-            {
-                AddHandler(RChangedEvent, value);
-            }
-            remove
-            {
-                RemoveHandler(RChangedEvent, value);
-            }
-        }
-
-        public static readonly RoutedEvent RChangedEvent = EventManager.RegisterRoutedEvent("RChanged", RoutingStrategy.Bubble, typeof(RoutedPropertyChangedEventHandler<byte>), typeof(ColorPicker));
 
         #endregion
 
@@ -190,22 +160,7 @@ namespace Kfstorm.WpfExtensions
         {
             var picker = (ColorPicker)d;
             picker.UpdateColor(Color.FromArgb(picker.Color.A, picker.Color.R, (byte)e.NewValue, picker.Color.B), null);
-            picker.RaiseEvent(new RoutedPropertyChangedEventArgs<byte>((byte)e.OldValue, (byte)e.NewValue, GChangedEvent));
         }
-
-        public event RoutedPropertyChangedEventHandler<byte> GChanged
-        {
-            add
-            {
-                AddHandler(GChangedEvent, value);
-            }
-            remove
-            {
-                RemoveHandler(GChangedEvent, value);
-            }
-        }
-
-        public static readonly RoutedEvent GChangedEvent = EventManager.RegisterRoutedEvent("GChanged", RoutingStrategy.Bubble, typeof(RoutedPropertyChangedEventHandler<byte>), typeof(ColorPicker));
 
         #endregion
 
@@ -231,22 +186,7 @@ namespace Kfstorm.WpfExtensions
         {
             var picker = (ColorPicker)d;
             picker.UpdateColor(Color.FromArgb(picker.Color.A, picker.Color.R, picker.Color.G, (byte)e.NewValue), null);
-            picker.RaiseEvent(new RoutedPropertyChangedEventArgs<byte>((byte)e.OldValue, (byte)e.NewValue, BChangedEvent));
         }
-
-        public event RoutedPropertyChangedEventHandler<byte> BChanged
-        {
-            add
-            {
-                AddHandler(BChangedEvent, value);
-            }
-            remove
-            {
-                RemoveHandler(BChangedEvent, value);
-            }
-        }
-
-        public static readonly RoutedEvent BChangedEvent = EventManager.RegisterRoutedEvent("BChanged", RoutingStrategy.Bubble, typeof(RoutedPropertyChangedEventHandler<byte>), typeof(ColorPicker));
 
         #endregion
 
@@ -287,7 +227,6 @@ namespace Kfstorm.WpfExtensions
                     byte.Parse(((string)e.NewValue).Substring(4, 2), NumberStyles.HexNumber),
                     byte.Parse(((string)e.NewValue).Substring(6, 2), NumberStyles.HexNumber)),
                     null);
-                picker.RaiseEvent(new RoutedPropertyChangedEventArgs<string>((string)e.OldValue, (string)e.NewValue, HexStringChangedEvent));
             }
             else if (((string)e.NewValue).Length == 6 && !picker.IsAlphaEnabled)
             {
@@ -298,20 +237,6 @@ namespace Kfstorm.WpfExtensions
                     null);
             }
         }
-
-        public event RoutedPropertyChangedEventHandler<string> HexStringChanged
-        {
-            add
-            {
-                AddHandler(HexStringChangedEvent, value);
-            }
-            remove
-            {
-                RemoveHandler(HexStringChangedEvent, value);
-            }
-        }
-
-        public static readonly RoutedEvent HexStringChangedEvent = EventManager.RegisterRoutedEvent("HexStringChanged", RoutingStrategy.Bubble, typeof(RoutedPropertyChangedEventHandler<string>), typeof(ColorPicker));
 
         #endregion
 
@@ -331,7 +256,7 @@ namespace Kfstorm.WpfExtensions
         }
 
         public static readonly DependencyProperty IsAlphaEnabledProperty =
-            DependencyProperty.Register("IsAlphaEnabled", typeof(bool), typeof(ColorPicker), new FrameworkPropertyMetadata(true, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnIsAlphaEnabledChanged));
+            DependencyProperty.Register("IsAlphaEnabled", typeof(bool), typeof(ColorPicker), new FrameworkPropertyMetadata(true, OnIsAlphaEnabledChanged));
 
         public static void OnIsAlphaEnabledChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
@@ -376,8 +301,8 @@ namespace Kfstorm.WpfExtensions
         /// </summary>
         bool _updatingColor;
 
-        private Canvas _gradualCanvas;
-        private FrameworkElement _gradualSelector;
+        private Canvas _gradientCanvas;
+        private FrameworkElement _gradientSelector;
         private ColorSpectrumSlider _colorSpectrumSlider;
         private TextBox _tbA;
         private TextBox _tbR;
@@ -395,8 +320,8 @@ namespace Kfstorm.WpfExtensions
         {
             base.OnApplyTemplate();
 
-            _gradualCanvas = Template.FindName("PART_GradualCanvas", this) as Canvas;
-            _gradualSelector = Template.FindName("PART_GradualSelector", this) as FrameworkElement;
+            _gradientCanvas = Template.FindName("PART_GradientCanvas", this) as Canvas;
+            _gradientSelector = Template.FindName("PART_GradientSelector", this) as FrameworkElement;
             _colorSpectrumSlider = Template.FindName("PART_ColorSpectrumSlider", this) as ColorSpectrumSlider;
             _tbA = Template.FindName("PART_TextBoxA", this) as TextBox;
             _tbR = Template.FindName("PART_TextBoxR", this) as TextBox;
@@ -404,28 +329,28 @@ namespace Kfstorm.WpfExtensions
             _tbB = Template.FindName("PART_TextBoxB", this) as TextBox;
             _tbHexString = Template.FindName("PART_TextBoxHexString", this) as TextBox;
 
-            if (_gradualCanvas != null)
+            if (_gradientCanvas != null)
             {
-                _gradualCanvas.PreviewMouseLeftButtonDown += (o, e) =>
+                _gradientCanvas.PreviewMouseLeftButtonDown += (o, e) =>
                 {
-                    var p = e.GetPosition(_gradualCanvas);
+                    var p = e.GetPosition(_gradientCanvas);
                     UpdateColorByPosition(p);
-                    _gradualCanvas.CaptureMouse();
+                    _gradientCanvas.CaptureMouse();
                     e.Handled = true;
                 };
-                _gradualCanvas.MouseMove += (o, e) =>
+                _gradientCanvas.MouseMove += (o, e) =>
                 {
-                    if (_gradualCanvas.IsMouseCaptured && e.LeftButton == MouseButtonState.Pressed)
+                    if (_gradientCanvas.IsMouseCaptured && e.LeftButton == MouseButtonState.Pressed)
                     {
-                        var position = e.GetPosition(_gradualCanvas);
+                        var position = e.GetPosition(_gradientCanvas);
                         UpdateColorByPosition(position);
                     }
                 };
-                _gradualCanvas.MouseLeftButtonUp += (o, e) =>
+                _gradientCanvas.MouseLeftButtonUp += (o, e) =>
                 {
-                    _gradualCanvas.ReleaseMouseCapture();
+                    _gradientCanvas.ReleaseMouseCapture();
                 };
-                _gradualCanvas.SizeChanged += (o, e) =>
+                _gradientCanvas.SizeChanged += (o, e) =>
                 {
                     var hslColor = _lastPreciseColor ?? HslColor.FromArgb(Color);
                     hslColor.H = _colorSpectrumSlider.Value;
@@ -452,9 +377,9 @@ namespace Kfstorm.WpfExtensions
         protected void UpdateColorByPosition(Point position)
         {
             if (position.X < 0) position.X = 0;
-            if (position.X > _gradualCanvas.ActualWidth) position.X = _gradualCanvas.ActualWidth;
+            if (position.X > _gradientCanvas.ActualWidth) position.X = _gradientCanvas.ActualWidth;
             if (position.Y < 0) position.Y = 0;
-            if (position.Y > _gradualCanvas.ActualHeight) position.Y = _gradualCanvas.ActualHeight;
+            if (position.Y > _gradientCanvas.ActualHeight) position.Y = _gradientCanvas.ActualHeight;
 
             // Calculate the new color
             var hslColor = _lastPreciseColor ?? HslColor.FromArgb(_colorSpectrumSlider.SelectedColor);
@@ -462,8 +387,8 @@ namespace Kfstorm.WpfExtensions
             {
                 hslColor.A = (double)Color.A / 255;
             }
-            hslColor.S = position.X / _gradualCanvas.ActualWidth;
-            hslColor.L = 1 - position.Y / _gradualCanvas.ActualHeight;
+            hslColor.S = position.X / _gradientCanvas.ActualWidth;
+            hslColor.L = 1 - position.Y / _gradientCanvas.ActualHeight;
 
             UpdateColor(hslColor.ToArgb(), hslColor);
         }
@@ -481,17 +406,17 @@ namespace Kfstorm.WpfExtensions
             var hslColor = preciseColor ?? HslColor.FromArgb(newColor);
             _lastPreciseColor = preciseColor;
 
-            if (_gradualCanvas != null)
+            if (_gradientCanvas != null)
             {
                 if (preciseColor == null && Math.Abs(hslColor.S) < 1e-7 && Math.Abs(hslColor.L) < 1e-7)
                 {
-                    Canvas.SetLeft(_gradualSelector, _gradualCanvas.ActualWidth - _gradualSelector.ActualWidth / 2);
+                    Canvas.SetLeft(_gradientSelector, _gradientCanvas.ActualWidth - _gradientSelector.ActualWidth / 2);
                 }
                 else
                 {
-                    Canvas.SetLeft(_gradualSelector, hslColor.S * _gradualCanvas.ActualWidth - _gradualSelector.ActualWidth / 2);
+                    Canvas.SetLeft(_gradientSelector, hslColor.S * _gradientCanvas.ActualWidth - _gradientSelector.ActualWidth / 2);
                 }
-                Canvas.SetTop(_gradualSelector, (1 - hslColor.L) * _gradualCanvas.ActualHeight - _gradualSelector.ActualHeight / 2);
+                Canvas.SetTop(_gradientSelector, (1 - hslColor.L) * _gradientCanvas.ActualHeight - _gradientSelector.ActualHeight / 2);
                 if (hslColor.S > 0)
                 {
                     _colorSpectrumSlider.Value = hslColor.H;

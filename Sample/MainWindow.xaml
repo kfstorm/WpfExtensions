@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:ex="clr-namespace:Kfstorm.WpfExtensions;assembly=Kfstorm.WpfExtensions"
         mc:Ignorable="d"
-        Title="Sample" SizeToContent="WidthAndHeight" WindowStyle="None" AllowsTransparency="True">
+        Title="Sample" SizeToContent="WidthAndHeight" WindowStyle="None" AllowsTransparency="True" ResizeMode="CanResizeWithGrip">
     <DockPanel>
         <Grid DockPanel.Dock="Top" Background="BlueViolet"  MouseLeftButtonDown="TitleBar_OnMouseLeftButtonDown">
             <StackPanel Orientation="Horizontal" Height="24" HorizontalAlignment="Right">
@@ -27,14 +27,18 @@
                     <RowDefinition Height="Auto"></RowDefinition>
                     <RowDefinition Height="10"></RowDefinition>
                     <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="10"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
                 </Grid.RowDefinitions>
                 <Label>FontPicker</Label>
                 <!-- ReSharper disable once MarkupAttributeTypo -->
                 <ex:FontPicker Grid.Row="0" Grid.Column="2" Font="Segoe Script"/>
                 <Label Grid.Row="2" Grid.Column="0">ColorPicker</Label>
                 <ex:ColorPicker Grid.Row="2" Grid.Column="2" Color="#B012CA44"></ex:ColorPicker>
-                <Label Grid.Row="4" Grid.Column="0">ColorPicker</Label>
-                <CheckBox Grid.Row="4" Grid.Column="2" x:Name="CbShowShadowWindow" IsChecked="True" Checked="CbShowShadowWindow_OnChecked" Unchecked="CbShowShadowWindow_OnUnchecked">Show shadow</CheckBox>
+                <Label Grid.Row="4" Grid.Column="0">PopupableColorPicker</Label>
+                <ex:PopupableColorPicker Grid.Row="4" Grid.Column="2" Color="#95E50F58"></ex:PopupableColorPicker>
+                <Label Grid.Row="6" Grid.Column="0">ShadowWindow</Label>
+                <CheckBox Grid.Row="6" Grid.Column="2" x:Name="CbShowShadowWindow" IsChecked="True" Checked="CbShowShadowWindow_OnChecked" Unchecked="CbShowShadowWindow_OnUnchecked">Show shadow</CheckBox>
             </Grid>
         </ScrollViewer>
     </DockPanel>
