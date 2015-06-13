@@ -9,6 +9,8 @@ assembly_info:
   assembly_version: '{version}'
   assembly_file_version: '{version}'
   assembly_informational_version: 0.1.0-alpha
+install:
+- set PATH=C:\Program Files (x86)\MSBuild\14.0\Bin;%PATH%
 nuget:
   account_feed: true
   disable_publish_on_pr: true
