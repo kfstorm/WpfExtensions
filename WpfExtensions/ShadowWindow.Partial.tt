@@ -1,0 +1,55 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".cs" #>
+<# var positions = new []{ "Bottom", "BottomLeft", "BottomRight", "Left", "Right", "Top", "TopLeft", "TopRight" }; #>
+<# var prefixes = new []{ "Active", "Inactive" }; #>
+<# var combinations = (from prefix in prefixes from position in positions select prefix + position).ToArray(); #>
+
+using System;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+
+namespace Kfstorm.WpfExtensions
+{
+    partial class ShadowWindow
+    {
+<# foreach (var combination in combinations) #>
+<# { #>
+        protected static readonly ImageSource <#=combination#>Image;
+<# } #>
+
+        static ShadowWindow()
+        {
+<# foreach (var combination in combinations) #>
+<# { #>
+            <#=combination#>Image = new BitmapImage(new Uri("pack://application:,,,/Kfstorm.WpfExtensions;component/Images/Shadow/<#=combination#>.png"));
+            <#=combination#>Image.Freeze();
+<# } #>
+        }
+
+        /// <summary>
+        /// Changes to active shadow.
+        /// </summary>
+        protected void ChangeToActiveShadow()
+        {
+<# foreach (var position in positions) #>
+<# { #>
+            Im<#=position#>.Source = Active<#=position#>Image;
+<# } #>
+        }
+
+        /// <summary>
+        /// Changes to inactive shadow.
+        /// </summary>
+        protected void ChangeToInactiveShadow()
+        {
+<# foreach (var position in positions) #>
+<# { #>
+            Im<#=position#>.Source = Inactive<#=position#>Image;
+<# } #>
+        }
+    }
+}

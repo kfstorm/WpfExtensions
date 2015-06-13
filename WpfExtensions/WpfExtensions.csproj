@@ -47,6 +47,10 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="ShadowWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Themes\Generic.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -56,13 +60,29 @@
     <Compile Include="ColorPicker.cs" />
     <Compile Include="ColorSpectrumSlider.cs" />
     <Compile Include="DwmHelper.cs" />
-    <Compile Include="DWM_BLURBEHIND.cs" />
+    <Compile Include="Interop\DWM_BLURBEHIND.cs" />
     <Compile Include="FontPicker.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="HslColor.cs" />
-    <Compile Include="NativeMethods.cs" />
-    <Compile Include="WindowMessage.cs" />
+    <Compile Include="Interop\GWL.cs" />
+    <Compile Include="Interop\HOOKPROC.cs" />
+    <Compile Include="Interop\HWND.cs" />
+    <Compile Include="Interop\KBDLLHOOKSTRUCT.cs" />
+    <Compile Include="Interop\NativeMethods.cs" />
+    <Compile Include="Interop\RECT.cs" />
+    <Compile Include="Interop\SWP.cs" />
+    <Compile Include="Interop\WH.cs" />
+    <Compile Include="Interop\WS.cs" />
+    <Compile Include="ShadowWindow.Partial.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ShadowWindow.Partial.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ShadowWindow.xaml.cs">
+      <DependentUpon>ShadowWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Interop\WindowMessage.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -72,6 +92,28 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Shadow\ActiveBottom.png" />
+    <Resource Include="Images\Shadow\ActiveBottomLeft.png" />
+    <Resource Include="Images\Shadow\ActiveBottomRight.png" />
+    <Resource Include="Images\Shadow\ActiveLeft.png" />
+    <Resource Include="Images\Shadow\ActiveRight.png" />
+    <Resource Include="Images\Shadow\ActiveTop.png" />
+    <Resource Include="Images\Shadow\ActiveTopLeft.png" />
+    <Resource Include="Images\Shadow\ActiveTopRight.png" />
+    <Resource Include="Images\Shadow\InactiveBottom.png" />
+    <Resource Include="Images\Shadow\InactiveBottomLeft.png" />
+    <Resource Include="Images\Shadow\InactiveBottomRight.png" />
+    <Resource Include="Images\Shadow\InactiveLeft.png" />
+    <Resource Include="Images\Shadow\InactiveRight.png" />
+    <Resource Include="Images\Shadow\InactiveTop.png" />
+    <Resource Include="Images\Shadow\InactiveTopLeft.png" />
+    <Resource Include="Images\Shadow\InactiveTopRight.png" />
+    <Content Include="ShadowWindow.Partial.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ShadowWindow.Partial.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

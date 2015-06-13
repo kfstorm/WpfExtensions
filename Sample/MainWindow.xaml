@@ -5,22 +5,37 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:ex="clr-namespace:Kfstorm.WpfExtensions;assembly=Kfstorm.WpfExtensions"
         mc:Ignorable="d"
-        Title="Sample" Height="350" Width="525">
-    <Grid Margin="20">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"></ColumnDefinition>
-            <ColumnDefinition Width="20"></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"></RowDefinition>
-            <RowDefinition Height="10"></RowDefinition>
-            <RowDefinition Height="Auto"></RowDefinition>
-        </Grid.RowDefinitions>
-        <Label>FontPicker</Label>
-        <!-- ReSharper disable once MarkupAttributeTypo -->
-        <ex:FontPicker Grid.Row="0" Grid.Column="2" Font="Segoe Script"/>
-        <Label Grid.Row="2" Grid.Column="0">ColorPicker</Label>
-        <ex:ColorPicker Grid.Row="2" Grid.Column="2" Color="#B012CA44"></ex:ColorPicker>
-    </Grid>
+        Title="Sample" SizeToContent="WidthAndHeight" WindowStyle="None" AllowsTransparency="True">
+    <DockPanel>
+        <Grid DockPanel.Dock="Top" Background="BlueViolet"  MouseLeftButtonDown="TitleBar_OnMouseLeftButtonDown">
+            <StackPanel Orientation="Horizontal" Height="24" HorizontalAlignment="Right">
+                <Button x:Name="BtnMin" Click="BtnMin_OnClick">min</Button>
+                <Button x:Name="BtnMax" Click="BtnMax_OnClick">max</Button>
+                <Button x:Name="BtnClose" Click="BtnClose_OnClick">close</Button>
+            </StackPanel>
+        </Grid>
+        <ScrollViewer Margin="20" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    <ColumnDefinition Width="20"></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="10"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="10"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Label>FontPicker</Label>
+                <!-- ReSharper disable once MarkupAttributeTypo -->
+                <ex:FontPicker Grid.Row="0" Grid.Column="2" Font="Segoe Script"/>
+                <Label Grid.Row="2" Grid.Column="0">ColorPicker</Label>
+                <ex:ColorPicker Grid.Row="2" Grid.Column="2" Color="#B012CA44"></ex:ColorPicker>
+                <Label Grid.Row="4" Grid.Column="0">ColorPicker</Label>
+                <CheckBox Grid.Row="4" Grid.Column="2" x:Name="CbShowShadowWindow" IsChecked="True" Checked="CbShowShadowWindow_OnChecked" Unchecked="CbShowShadowWindow_OnUnchecked">Show shadow</CheckBox>
+            </Grid>
+        </ScrollViewer>
+    </DockPanel>
 </Window>

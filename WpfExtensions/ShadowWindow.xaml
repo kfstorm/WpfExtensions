@@ -1,0 +1,26 @@
+﻿<Window x:Class="Kfstorm.WpfExtensions.ShadowWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Name="Window"
+        WindowStyle="None" AllowsTransparency="True" ShowInTaskbar="False" Background="{x:Null}" ShowActivated="False" Activated="Window_Activated" ResizeMode="NoResize">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="{Binding GridShadowSize, ElementName=Window}"/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="{Binding GridShadowSize, ElementName=Window}"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="{Binding GridShadowSize, ElementName=Window}"/>
+            <RowDefinition/>
+            <RowDefinition Height="{Binding GridShadowSize, ElementName=Window}"/>
+        </Grid.RowDefinitions>
+        <Image x:Name="ImTopLeft" Stretch="Fill"/>
+        <Image x:Name="ImTop" Grid.Row="0" Grid.Column="1" Stretch="Fill"/>
+        <Image x:Name="ImTopRight" Grid.Row="0" Grid.Column="2" Stretch="Fill"/>
+        <Image x:Name="ImLeft" Grid.Row="1" Grid.Column="0" Stretch="Fill"/>
+        <Image x:Name="ImRight" Grid.Row="1" Grid.Column="2" Stretch="Fill"/>
+        <Image x:Name="ImBottomLeft" Grid.Row="2" Grid.Column="0" Stretch="Fill"/>
+        <Image x:Name="ImBottom" Grid.Row="2" Grid.Column="1" Stretch="Fill"/>
+        <Image x:Name="ImBottomRight" Grid.Row="2" Grid.Column="2" Stretch="Fill"/>
+    </Grid>
+</Window>

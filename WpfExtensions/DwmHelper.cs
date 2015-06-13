@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Interop;
+using Kfstorm.WpfExtensions.Interop;
 
 namespace Kfstorm.WpfExtensions
 {
