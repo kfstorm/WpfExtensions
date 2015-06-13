@@ -7,8 +7,11 @@
         <authors>$author$</authors>
         <projectUrl>https://github.com/kfstorm/WpfExtensions</projectUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
-        <description>$description$</description>
-        <releaseNotes>Add XML documentation.</releaseNotes>
+        <summary>Useful WPF controls and tools.</summary>
+        <description>- Font Picker: To let user pick a font from combobox.
+- Color Picker &amp; Popupable Color Picker: To let user pick a color.
+- Shadow Window: To enable Windows 7 style shadow on windows with AllowsTransparency set to true.
+- DWM Helper: To enable Aero effect as the background of a window.</description>
         <language>en-US</language>
     </metadata>
 </package>

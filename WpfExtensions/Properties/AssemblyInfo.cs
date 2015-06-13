@@ -6,11 +6,7 @@ using System.Windows;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Kfstorm.WpfExtensions")]
-[assembly: AssemblyDescription(@"Useful WPF controls and tools. Including:
-- Font Picker: To let user pick a font from combobox.
-- Color Picker & Popupable Color Picker: To let user pick a color.
-- Shadow Window: To enable Windows 7 style shadow on windows with AllowsTransparency set to true.
-- DWM Helper: To enable Aero effect as the background of a window.")]
+[assembly: AssemblyDescription("Useful WPF controls and tools.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("K.F.Storm")]
 [assembly: AssemblyProduct("Kfstorm.WpfExtensions")]
