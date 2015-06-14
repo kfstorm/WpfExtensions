@@ -111,10 +111,10 @@
     <Resource Include="Images\Shadow\InactiveTop.png" />
     <Resource Include="Images\Shadow\InactiveTopLeft.png" />
     <Resource Include="Images\Shadow\InactiveTopRight.png" />
-    <Content Include="ShadowWindow.Partial.tt">
+    <None Include="ShadowWindow.Partial.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>ShadowWindow.Partial.cs</LastGenOutput>
-    </Content>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
